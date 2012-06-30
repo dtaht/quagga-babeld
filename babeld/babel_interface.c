@@ -462,6 +462,27 @@ DEFUN (babel_set_update_interval,
     return CMD_SUCCESS;
 }
 
+DEFUN (babel_set_rxcost,
+       babel_set_rxcost_cmd,
+       "babel rxcost <1-65534>",
+       "Babel interface commands\n"
+       "Rxcost multiplier\n"
+       "Units")
+{
+    struct interface *ifp;
+    babel_interface_nfo *babel_ifp;
+    int rxcost;
+
+    VTY_GET_INTEGER_RANGE("units", rxcost, argv[0], 1, 0x10000 - 1);
+
+    ifp = vty->index;
+    babel_ifp = babel_get_if_nfo(ifp);
+    assert (babel_ifp != NULL);
+
+    babel_ifp->cost = rxcost;
+    return CMD_SUCCESS;
+}
+
 /* This should be no more than half the hello interval, so that hellos
    aren't sent late.  The result is in milliseconds. */
 unsigned
@@ -696,6 +717,7 @@ show_babel_interface_sub (struct vty *vty, struct interface *ifp)
            CHECK_FLAG (babel_ifp->flags, BABEL_IF_SPLIT_HORIZON) ? "On" : "Off", VTY_NEWLINE);
   vty_out (vty, "  Hello interval is %u ms%s", babel_ifp->hello_interval, VTY_NEWLINE);
   vty_out (vty, "  Update interval is %u ms%s", babel_ifp->update_interval, VTY_NEWLINE);
+  vty_out (vty, "  Rxcost multiplier is %u%s", babel_ifp->cost, VTY_NEWLINE);
 }
 
 DEFUN (show_babel_interface,
@@ -891,6 +913,7 @@ babel_if_init ()
     install_element(INTERFACE_NODE, &babel_set_wireless_cmd);
     install_element(INTERFACE_NODE, &babel_set_hello_interval_cmd);
     install_element(INTERFACE_NODE, &babel_set_update_interval_cmd);
+    install_element(INTERFACE_NODE, &babel_set_rxcost_cmd);
 
     /* "show babel ..." commands */
     install_element(VIEW_NODE, &show_babel_interface_cmd);
