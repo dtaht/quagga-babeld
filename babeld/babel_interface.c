@@ -1129,11 +1129,15 @@ interface_config_write (struct vty *vty)
             write++;
         }
         if (CHECK_FLAG (babel_ifp->flags, BABEL_IF_WIRED)) {
-            if (babel_ifp->cost != BABEL_DEFAULT_RXCOST_WIRED)
+            if (babel_ifp->cost != BABEL_DEFAULT_RXCOST_WIRED) {
                 vty_out (vty, " babel rxcost %u%s", babel_ifp->cost, VTY_NEWLINE);
+                write++;
+            }
         } else {
-            if (babel_ifp->cost != BABEL_DEFAULT_RXCOST_WIRELESS)
+            if (babel_ifp->cost != BABEL_DEFAULT_RXCOST_WIRELESS) {
                 vty_out (vty, " babel rxcost %u%s", babel_ifp->cost, VTY_NEWLINE);
+                write++;
+            }
         }
         vty_out (vty, "!%s", VTY_NEWLINE);
         write++;
