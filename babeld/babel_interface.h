@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include <zebra.h>
 #include "zclient.h"
 #include "vty.h"
+#include "distribute.h"
 
 #define CONFIG_DEFAULT 0
 #define CONFIG_NO 1
@@ -62,11 +63,8 @@ struct babel_interface {
     unsigned update_interval;
 
     /* For filter type slot. */
-#define BABEL_FILTER_IN  0
-#define BABEL_FILTER_OUT 1
-#define BABEL_FILTER_MAX 2
-    struct access_list *list[BABEL_FILTER_MAX];               /* Access-list. */
-    struct prefix_list *prefix[BABEL_FILTER_MAX];             /* Prefix-list. */
+    struct access_list *list[DISTRIBUTE_MAX];                 /* Access-list. */
+    struct prefix_list *prefix[DISTRIBUTE_MAX];               /* Prefix-list. */
 };
 
 typedef struct babel_interface babel_interface_nfo;
