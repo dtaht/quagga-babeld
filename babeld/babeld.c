@@ -142,7 +142,7 @@ babel_create_routing_process (void)
     thread_add_read(master, &babel_read_protocol, NULL, protocol_socket);
     /* wait a little: zebra will announce interfaces, addresses, routes... */
     babel_routing_process->t_update =
-    thread_add_timer_msec(master, &babel_init_routing_process, NULL, 200L);
+    thread_add_timer_msec(master, babel_init_routing_process, NULL, 200L);
     return 0;
 
 fail:
@@ -483,7 +483,7 @@ babel_set_timer(struct timeval *timeout)
         thread_cancel(babel_routing_process->t_update);
     }
     babel_routing_process->t_update =
-    thread_add_timer_msec(master, &babel_main_loop, NULL, msecs);
+    thread_add_timer_msec(master, babel_main_loop, NULL, msecs);
 }
 
 /* Schedule a neighbours check after roughly 3/2 times msecs have elapsed. */
