@@ -134,7 +134,7 @@ parse_route_attributes(const unsigned char *a, int alen,
 
     while(i < alen) {
         type = a[i];
-        if(type == 0) {
+        if(type == SUBTLV_PAD1) {
             i++;
             continue;
         }
@@ -149,9 +149,9 @@ parse_route_attributes(const unsigned char *a, int alen,
             return;
         }
 
-        if(type == 1) {
+        if(type == SUBTLV_PADN) {
             /* Nothing. */
-        } else if(type == 2) {
+        } else if(type == SUBTLV_DIVERSITY) {
             if(len > DIVERSITY_HOPS) {
                 fprintf(stderr,
                         "Received overlong channel information (%d > %d).\n",
