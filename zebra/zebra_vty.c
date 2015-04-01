@@ -729,7 +729,6 @@ vty_show_ip_route_detail (struct vty *vty, struct route_node *rn, int mcast)
 #define ONE_WEEK_SECOND 60*60*24*7
       if (rib->type == ZEBRA_ROUTE_RIP
 	  || rib->type == ZEBRA_ROUTE_OSPF
-	  || rib->type == ZEBRA_ROUTE_BABEL
 	  || rib->type == ZEBRA_ROUTE_ISIS
 	  || rib->type == ZEBRA_ROUTE_BGP)
 	{
@@ -924,7 +923,6 @@ vty_show_ip_route (struct vty *vty, struct route_node *rn, struct rib *rib)
 
       if (rib->type == ZEBRA_ROUTE_RIP
 	  || rib->type == ZEBRA_ROUTE_OSPF
-	  || rib->type == ZEBRA_ROUTE_BABEL
 	  || rib->type == ZEBRA_ROUTE_ISIS
 	  || rib->type == ZEBRA_ROUTE_BGP)
 	{
@@ -1825,7 +1823,6 @@ vty_show_ipv6_route_detail (struct vty *vty, struct route_node *rn)
 #define ONE_WEEK_SECOND 60*60*24*7
       if (rib->type == ZEBRA_ROUTE_RIPNG
 	  || rib->type == ZEBRA_ROUTE_OSPF6
-	  || rib->type == ZEBRA_ROUTE_BABEL
 	  || rib->type == ZEBRA_ROUTE_ISIS
 	  || rib->type == ZEBRA_ROUTE_BGP)
 	{
@@ -1967,7 +1964,6 @@ vty_show_ipv6_route (struct vty *vty, struct route_node *rn,
       
       if (rib->type == ZEBRA_ROUTE_RIPNG
 	  || rib->type == ZEBRA_ROUTE_OSPF6
-	  || rib->type == ZEBRA_ROUTE_BABEL
 	  || rib->type == ZEBRA_ROUTE_ISIS
 	  || rib->type == ZEBRA_ROUTE_BGP)
 	{
